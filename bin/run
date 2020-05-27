@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require_relative '../lib/pokemon_cli.rb'
-
-#Cli.new.run
+# testing 123
+Cli.new.run
