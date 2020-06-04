@@ -4,15 +4,16 @@ class Pokemon
   attr_reader :name, :id
   attr_accessor :attack, :hp, :defense
   @@all = []
-  def initialize(name, id)
-    @name = name
-    @id = id
+  def initialize(hash)
+    @name = hash[:name]
+    @id = hash[:id].to_i
     @@all << self
   end
 
   def self.find_by_id(id)
-    index = id.to_i - 1
-    all[index]
+    all.find do |poke|
+      poke.id == id
+    end
   end
 
   def self.all

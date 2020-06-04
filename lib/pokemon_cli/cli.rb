@@ -8,18 +8,18 @@ class Cli
   end
 
   def main
-    loading
+    # loading
     print_all
     print_selection_prompt
-    id = valid_id?(prompt_selection)
-    updated_pokemon = get_pokemon_details(id)
-    print_details(updated_pokemon)
+    selection = valid_id?(prompt_selection)
+    poke = get_pokemon(selection)
+    print_details(poke)
     print_continue
     continue?(prompt_selection)
   end
 
   def print_all
-    Pokemon.all.each { |p| puts "#{p.id}.) #{p.name}" }
+    Pokemon.all.each.with_index(1) { |p, index| puts "#{index}.) #{p.name}" }
   end
 
   def print_selection_prompt
@@ -72,9 +72,9 @@ class Cli
     end
   end
 
-  def get_pokemon_details(id)
+  def get_pokemon(id)
     selected_pokemon = Pokemon.find_by_id(id)
-    Api.get_details_by_id(id) unless selected_pokemon.has_details?
+    Api.get_details(selected_pokemon) unless selected_pokemon.has_details?
     selected_pokemon
   end
 
